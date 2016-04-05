@@ -1,0 +1,12 @@
+/target/
+/autoUpdate/
+/logs/*.*
+/target/*
+.settings
+.classpath
+.project
+/META-INF/*
+/eframe-core/target/*
+/eframe-dataAccess/target/*
+/eframe-rpcAccess/target/*
+/eframe-spider/target/*
