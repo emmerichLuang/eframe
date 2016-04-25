@@ -10,6 +10,7 @@
   	<module>eframe-dataAccess</module>
   	<module>eframe-rpcAccess</module>
     <module>eframe-spider</module>
+    <module>eframe-workflow</module>
   </modules>
   
 	<properties>
@@ -26,7 +27,7 @@
 		</dependency>
 	</dependencies>	
 	
-	<!-- 只是声明了，module们没直接使用的依赖 -->
+	<!-- 只是声明了，module们没直接使用的依赖-->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
