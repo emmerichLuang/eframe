@@ -4,5 +4,7 @@ core：spring辅助；
 dataAccess：数据访问；
 rpcAccess：访问外部接口；
 spider：抓数据，爬虫~
+workflow：工作流
+priority：权限。
 
 以后想到再补充吧。
