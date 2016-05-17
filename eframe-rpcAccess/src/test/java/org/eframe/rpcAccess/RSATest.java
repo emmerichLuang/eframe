@@ -4,29 +4,12 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Map;
 
-import org.eframe.rpcAccess.encypt.algorithm.BASE64;
-import org.eframe.rpcAccess.encypt.algorithm.MD5;
 import org.eframe.rpcAccess.encypt.algorithm.RSA;
 
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
-public class EncodeTest {
+public class RSATest {
 
-	public static void base64Test(String content) throws Exception {
-		BASE64 encoder = new BASE64();
-		String encyptedContent = encoder.encypt(content);
-		System.err.println("加密内容：" + encyptedContent);
-		
-		String sourceContent = encoder.decrypt(encyptedContent);
-		System.err.println("解密内容：" + sourceContent);
-		
-	}	
-	
-	public static void md5Test(String content, String key) throws Exception {
-		MD5 encoder = new MD5();
-		String encyptedContent = encoder.encypt(content, key);
-		System.err.println(encyptedContent);
-	}
 
 	/**
 	 * 模拟一个请求响应
@@ -36,7 +19,7 @@ public class EncodeTest {
 	 * @throws Exception
 	 * @param
 	 */
-	public static void RSATest(String requestStr, final String publicKey,
+	public static void TestRSA(String requestStr, final String publicKey,
 			final String privateKey) throws Exception {
 		RSA encoder = new RSA();
 		

@@ -13,6 +13,7 @@ public class MD5{
 
 	/**
 	 * 生成信息摘要
+	 * 这个md5 用 content+key 来计算的
 	 * @param content 待加密的内容
 	 * @param key 盐，混淆用。
 	 */
@@ -36,7 +37,15 @@ public class MD5{
 		return new String(resultCharArray);
 	}
 
-	public String encypt(String content) throws Exception {
+	/**
+	 * 无盐版。不建议外部使用这个方法。
+	 * 给encypt(String content, String key) 这个方法使用
+	 * @param content
+	 * @return
+	 * @throws Exception
+	 * @param
+	 */
+	private String encypt(String content) throws Exception {
 		MessageDigest md5 = MessageDigest.getInstance("MD5");
 		md5.update(content.getBytes());
 		return byteArrayToHex(md5.digest());

@@ -6,7 +6,7 @@ package org.eframe.rpcAccess.encypt.constant;
  * @date   2016年5月17日
  *
  */
-public enum EnCoderType {
+public enum EncyptType {
 	BASE64,
 	MD5,
 	RSA
