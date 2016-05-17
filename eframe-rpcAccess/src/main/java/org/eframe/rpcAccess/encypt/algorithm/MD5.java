@@ -1,9 +1,6 @@
-package org.eframe.rpcAccess.encypt.behavior.impl;
+package org.eframe.rpcAccess.encypt.algorithm;
 
 import java.security.MessageDigest;
-
-import org.eframe.core.exception.BizException;
-import org.eframe.rpcAccess.encypt.behavior.IEncoder;
 
 /**
  * md5的方式生成指纹。
@@ -12,7 +9,7 @@ import org.eframe.rpcAccess.encypt.behavior.IEncoder;
  * @date   2016年5月17日
  *
  */
-public class MD5 implements IEncoder {
+public class MD5{
 
 	/**
 	 * 生成信息摘要
@@ -43,14 +40,6 @@ public class MD5 implements IEncoder {
 		MessageDigest md5 = MessageDigest.getInstance("MD5");
 		md5.update(content.getBytes());
 		return byteArrayToHex(md5.digest());
-	}
-
-	public String decrypt(String content) throws Exception {
-		throw new BizException().setMsg("md5不支持解密");
-	}
-	
-	public String decrypt(String content, String key) {
-		throw new BizException().setMsg("md5不支持解密");
 	}
 
 }

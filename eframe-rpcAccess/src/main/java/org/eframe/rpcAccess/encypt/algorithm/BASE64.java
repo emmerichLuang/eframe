@@ -1,7 +1,4 @@
-package org.eframe.rpcAccess.encypt.behavior.impl;
-
-import org.eframe.core.exception.BizException;
-import org.eframe.rpcAccess.encypt.behavior.IEncoder;
+package org.eframe.rpcAccess.encypt.algorithm;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -13,7 +10,7 @@ import sun.misc.BASE64Encoder;
  * @date   2016年5月17日
  *
  */
-public class BASE64 implements IEncoder {
+public class BASE64  {
 
 	public String encypt(String content) throws Exception {
 		return (new BASE64Encoder()).encodeBuffer(content.getBytes());
@@ -33,12 +30,4 @@ public class BASE64 implements IEncoder {
 		return temp;
 	}
 	
-	public String encypt(String content, String key) throws Exception {
-		throw new BizException().setMsg("base64无秘钥");
-	}	
-	
-	public String decrypt(String content, String key) {
-		throw new BizException().setMsg("base64无秘钥");
-	}
-
 }

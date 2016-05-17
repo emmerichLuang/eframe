@@ -4,17 +4,16 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Map;
 
-import org.eframe.rpcAccess.encypt.EncodeFactory;
-import org.eframe.rpcAccess.encypt.behavior.IEncoder;
-import org.eframe.rpcAccess.encypt.behavior.impl.RSA;
-import org.eframe.rpcAccess.encypt.constant.EnCoderType;
+import org.eframe.rpcAccess.encypt.algorithm.BASE64;
+import org.eframe.rpcAccess.encypt.algorithm.MD5;
+import org.eframe.rpcAccess.encypt.algorithm.RSA;
 
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 public class EncodeTest {
 
 	public static void base64Test(String content) throws Exception {
-		IEncoder encoder = EncodeFactory.getEncoder(EnCoderType.BASE64);
+		BASE64 encoder = new BASE64();
 		String encyptedContent = encoder.encypt(content);
 		System.err.println("加密内容：" + encyptedContent);
 		
@@ -24,28 +23,51 @@ public class EncodeTest {
 	}	
 	
 	public static void md5Test(String content, String key) throws Exception {
-		IEncoder encoder = EncodeFactory.getEncoder(EnCoderType.MD5);
+		MD5 encoder = new MD5();
 		String encyptedContent = encoder.encypt(content, key);
 		System.err.println(encyptedContent);
 	}
 
-	
-	
-	public static void RSATest(String content, String publicKey,
-			String privateKey) throws Exception {
-		IEncoder encoder = EncodeFactory.getEncoder(EnCoderType.RSA);
-		String encyptedContent = encoder.encypt(content, publicKey);
-		System.err.println("加密内容：" + encyptedContent);
+	/**
+	 * 模拟一个请求响应
+	 * @param requestStr
+	 * @param publicKey
+	 * @param privateKey
+	 * @throws Exception
+	 * @param
+	 */
+	public static void RSATest(String requestStr, final String publicKey,
+			final String privateKey) throws Exception {
+		RSA encoder = new RSA();
+		
+		//模拟client到server
+		//私钥加密
+		String encyptedReq = encoder.encryptByPrivateKey(requestStr, privateKey);
+		System.err.println("私钥加密后请求：" + encyptedReq);
 
-		String sourceContent = encoder.decrypt(encyptedContent, privateKey);
-		System.err.println("解密内容：" + sourceContent);
+		//模拟server收到后解密
+		//公钥解密
+		String sourceReq = encoder.decryptByPublic(encyptedReq, publicKey);
+		System.err.println("公钥解密，请求：" + sourceReq);			
+
+		//模拟server加密
+		String responseStr = "原封不动响应："+requestStr;
+		//公钥加密
+		String encyptedResp = encoder.encyptByPublicKey(responseStr, publicKey);
+		System.err.println("加密后响应：" + encyptedResp);
+
+		//模拟client收到后解密
+		//私钥解密
+		String sourceResp = encoder.decryptByPrivate(encyptedResp, privateKey);
+		System.err.println("私钥解密，内容：" + sourceResp);			
 	}
 
+	
 	public static void main(String[] args) throws Exception {
 		//md5Test("内容", "key");
 
 		//base64Test("原来的内容");
-		Map<String, Object> keys = RSA.initKey();
+		Map<String, Object> keys = RSA.initKey(1024);
 		RSAPublicKey publicKey = (RSAPublicKey) keys.get(RSA.PUBLIC_KEY);
 		RSAPrivateKey privateKey = (RSAPrivateKey) keys.get(RSA.PRIVATE_KEY);
 		
