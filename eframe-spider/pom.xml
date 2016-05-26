@@ -8,13 +8,32 @@
 		<artifactId>eframe</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com</groupId>
 	<artifactId>eframe-spider</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>eframe-spider</name>
 
-
 	<properties>
-	
+		<httpcomponents.version>4.4.1</httpcomponents.version>
 	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpcomponents.version}</version>
+		</dependency>	
+		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>${httpcomponents.version}</version>
+		</dependency>		
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>				
+		
+	</dependencies>
+
 </project>
