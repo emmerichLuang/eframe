@@ -10,8 +10,10 @@ import sun.misc.BASE64Encoder;
  * @date   2016年5月17日
  *
  */
+@SuppressWarnings("restriction")
 public class BASE64  {
 
+	
 	public String encypt(String content) throws Exception {
 		return (new BASE64Encoder()).encodeBuffer(content.getBytes());
 	}

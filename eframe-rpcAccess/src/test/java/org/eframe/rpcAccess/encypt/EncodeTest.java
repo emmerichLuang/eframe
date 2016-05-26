@@ -1,4 +1,4 @@
-package org.eframe.rpcAccess;
+package org.eframe.rpcAccess.encypt;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;

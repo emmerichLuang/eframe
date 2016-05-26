@@ -28,6 +28,13 @@
 			<!-- <version>3.8.1</version> -->
 			<type>jar</type>
 		</dependency>
+
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>1.3.2</version>
+		</dependency>		
+		
 	</dependencies>	
 	
 	<!-- 只是声明了，module们没直接使用的依赖-->
