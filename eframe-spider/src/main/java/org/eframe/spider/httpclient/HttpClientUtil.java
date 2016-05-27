@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 public class HttpClientUtil {
 
@@ -39,17 +40,16 @@ public class HttpClientUtil {
 		CloseableHttpResponse response = httpclient.execute(httpget);
 		try {
 			HttpEntity entity = response.getEntity();
-			
 			Charset charset = getCharset(response);
 			
-			StringWriter writer = new StringWriter();
+			/*StringWriter writer = new StringWriter();
 			IOUtils.copy(entity.getContent(), writer, charset);
-			
 			//getHeader(response);
-			
 			String theString = writer.toString();
-			System.err.println(theString);
+			System.err.println(theString);*/
 			
+			String content = EntityUtils.toString(entity, charset);
+			System.err.println(content);
 		} finally {
 		    response.close();
 		}
