@@ -1,4 +1,4 @@
-package org.eframe.spider;
+package org.eframe.spider.http;
 
 import java.io.IOException;
 import java.io.StringWriter;

@@ -1,4 +1,4 @@
-package org.eframe.spider;
+package org.eframe.spider.http;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
