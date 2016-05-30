@@ -1,4 +1,4 @@
-package org.eframe.spider.httpclient;
+package org.eframe.spider;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -16,7 +16,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-public class HttpClientUtil {
+public class Demo {
 
 	private static Object getHeader(HttpResponse response){
 		
@@ -36,7 +36,7 @@ public class HttpClientUtil {
 	
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpGet httpget = new HttpGet("http://seo.chinaz.com/");
+		HttpGet httpget = new HttpGet("http://www.baidu.com/");
 		CloseableHttpResponse response = httpclient.execute(httpget);
 		try {
 			HttpEntity entity = response.getEntity();
