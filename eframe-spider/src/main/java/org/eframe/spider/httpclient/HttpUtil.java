@@ -45,7 +45,9 @@ public class HttpUtil {
 	@SuppressWarnings("deprecation")
 	public static CloseableHttpClient getHttpClient(boolean https) {
 		if(!https){
-			return HttpClients.createDefault();
+			CloseableHttpClient client = HttpClients.createDefault();
+			
+			return client;
 		}
 		
 		RegistryBuilder<ConnectionSocketFactory> registryBuilder = RegistryBuilder.<ConnectionSocketFactory>create();
@@ -128,6 +130,9 @@ public class HttpUtil {
 					.setConnectTimeout(Config.ConnectTimeout).build();//设置请求和传输超时时间
 			httpGet.setConfig(requestConfig);
 		}
+		httpGet.addHeader("User-Agent", 
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36");
+		
 		try {
 			//请求数据
 			CloseableHttpResponse response = httpClient.execute(httpGet);
@@ -144,7 +149,8 @@ public class HttpUtil {
 				throw new ClientProtocolException("Unexpected response status: " + status);
 			}
 		} catch (Exception ex) {
-			CommonLog.error(ex, ex.getMessage());
+			System.err.println("get请求错误！ url："+url);
+			CommonLog.error(ex, "get请求错误！ url："+url);
 		} 
 		return responseBody;
 	}

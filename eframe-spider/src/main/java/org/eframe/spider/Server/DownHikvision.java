@@ -13,7 +13,7 @@ import org.eframe.spider.httpclient.HttpUtil;
  */
 public class DownHikvision {
 
-	public static final String url = "www.hikvision.com/cn/index.html";
+	public static final String url = "http://www.hikvision.com/cn/jjfajs_107_i474.html";
 	
 	public static final File folder = new File("E:/hikvision");
 	
