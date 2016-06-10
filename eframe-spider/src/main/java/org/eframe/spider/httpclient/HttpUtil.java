@@ -89,10 +89,10 @@ public class HttpUtil {
 		
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
 		
-		if (Context.SetTimeOut) {
+		if (Config.SetTimeOut) {
 			RequestConfig requestConfig = RequestConfig.custom()
-					.setSocketTimeout(Context.SocketTimeout)
-					.setConnectTimeout(Context.ConnectTimeout).build();//设置请求和传输超时时间
+					.setSocketTimeout(Config.SocketTimeout)
+					.setConnectTimeout(Config.ConnectTimeout).build();//设置请求和传输超时时间
 			httpGet.setConfig(requestConfig);
 		}
 		try {
@@ -122,10 +122,10 @@ public class HttpUtil {
 
 		HttpGet httpGet = new HttpGet(url);
 		
-		if (Context.SetTimeOut) {
+		if (Config.SetTimeOut) {
 			RequestConfig requestConfig = RequestConfig.custom()
-					.setSocketTimeout(Context.SocketTimeout)
-					.setConnectTimeout(Context.ConnectTimeout).build();//设置请求和传输超时时间
+					.setSocketTimeout(Config.SocketTimeout)
+					.setConnectTimeout(Config.ConnectTimeout).build();//设置请求和传输超时时间
 			httpGet.setConfig(requestConfig);
 		}
 		try {
