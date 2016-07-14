@@ -1,6 +1,12 @@
 package org.eframe.rpcAccess.encypt.algorithm;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * md5的方式生成指纹。
@@ -51,4 +57,50 @@ public class MD5{
 		return byteArrayToHex(md5.digest());
 	}
 
+	
+	public String generateFinger(Map<String,Object> data, String appId, String secret){
+		if(data==null){
+			throw new RuntimeException("data 不能为空");
+		}
+		
+		List<String> validParamsValue = new ArrayList<String>();
+		
+		//对象类型， double，decimal等类型都不做签名计算
+		for(String key:data.keySet()){
+			Object value = data.get(key);
+			if(value instanceof String){
+				validParamsValue.add((key+"="+value).toLowerCase());
+			}else if(value instanceof Integer){
+				validParamsValue.add((key+"="+value).toLowerCase());				
+			}else if(value instanceof Long){				
+				validParamsValue.add((key+"="+value).toLowerCase());				
+			}else if(value instanceof Boolean){
+				validParamsValue.add((key+"="+value).toLowerCase());				
+			}
+		}
+		//排序
+		/*Collections.sort(validParamsValue, new Comparator<String>(){
+
+			public int compare(String o1, String o2) {
+				return 0;
+			}
+
+			
+		});*/
+		java.util.Collections.sort(validParamsValue);
+		
+		//根据参数生成的字符串
+		String preSign = StringUtils.join(validParamsValue, "");
+		preSign=appId+preSign+secret;
+		System.err.println("preSign:"+preSign);
+		
+		MessageDigest md5 =null;
+		try {
+			md5 = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		md5.update(preSign.getBytes());
+		return byteArrayToHex(md5.digest());
+	}
 }

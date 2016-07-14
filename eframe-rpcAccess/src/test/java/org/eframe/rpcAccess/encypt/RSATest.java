@@ -78,15 +78,16 @@ public class RSATest {
 		// md5Test("内容", "key");
 
 		// base64Test("原来的内容");
-		Map<String, Object> keys = RSA.initKey(1024);
-		RSAPublicKey publicKey = (RSAPublicKey) keys.get(RSA.PUBLIC_KEY);
-		RSAPrivateKey privateKey = (RSAPrivateKey) keys.get(RSA.PRIVATE_KEY);
+		//Map<String, Object> keys = RSA.initKey(1024);
+		//RSAPublicKey publicKey = (RSAPublicKey) keys.get(RSA.PUBLIC_KEY);
+		//RSAPrivateKey privateKey = (RSAPrivateKey) keys.get(RSA.PRIVATE_KEY);
 
-		BASE64 base64 = new BASE64();
-		String publicKeyStr = base64.encypt(publicKey.getEncoded());
-		String privateKeyStr = base64.encypt(privateKey.getEncoded());
+		//BASE64 base64 = new BASE64();
+		//String publicKeyStr = base64.encypt(publicKey.getEncoded());
+		//String privateKeyStr = base64.encypt(privateKey.getEncoded());
 
-		//TODO: fileUtil,写下这2个字符串。
+		String publicKeyStr = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsfYUCzcT62mmO0ojXYRchdre/PblhfmaSRCidu8D72cgzdfawh6ZpwwBwx+d5Zu54AHU/mwhDA2miZQkWlunejU9GNB9N0A5VdeU69dstG+Lt1WA/+DzDiljyviHQuwUKRg3iRmAJ4/IyzU9XYFwtZIe/vnE5M2AbE6w2u7Y8uQIDAQAB";
+		String privateKeyStr = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKx9hQLNxPraaY7SiNdhFyF2t789uWF+ZpJEKJ27wPvZyDN19rCHpmnDAHDH53lm7ngAdT+bCEMDaaJlCRaW6d6NT0Y0H03QDlV15Tr12y0b4u3VYD/4PMOKWPK+IdC7BQpGDeJGYAnj8jLNT1dgXC1kh7++cTkzYBsTrDa7tjy5AgMBAAECgYAuLiTQTVrxdkxQiplMYJgaw3gKYXIiYf8AJfNh14ShaPsqm+iB9q9dHXIev8Z/QEmUIztA3jbmCiHb8oTuYVUXaSE0Bm+xgtfBV2ZWXvLHdsG1DC3G2/rao5Dhd8jIFYuSBviiRp1KRtHR9mXqQGDxUvtPbdVDJbUE9tcDW6anIQJBAOwVTeaAR0JM7WsGD61Whm/e9lEHrvlPtNMaUchxpuLLXaPRj4bGKT66qNloqF9PFHwvjlg9t8Jr5sBCu0PwSf0CQQC7CswokO6lqjwFgdp2wJxgxW+gFaP3dcJBxW1jX6+LbWrh3lgR+9o5XVhmsuD8ZOBbZMr9BllkOpPsSef68GxtAkBbhQ7D8qqtOyE2wgzFx6sqJycZ1n6wS4Pv6l4V9GkbtnbAkPaw6pUGqlnWnknXWNK6Kb1m29Ym2qmDktsBxV8JAkAFhQYNVGmWffWTfAeEZZ63xFvM75aNIO6AnmDiA9rcVHhI/hS/Qx1nf/ex4Cl/iUKNr+XFncBZktj2qh+sahfpAkEArTxKVcRuBj99FoUEO6E7jesxgVnqraWLkBEGvwN10j33DponXu86uZnFQ6Kys5qOax3AlfRfRjZ038YY7NHZ5Q==";
 		
 		// RSATest("悲了个剧", publicKeyStr, privateKeyStr);
 
