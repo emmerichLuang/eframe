@@ -8,7 +8,7 @@ import org.eframe.rpcAccess.transport.dto.MD5RequestDto;
 
 import com.alibaba.fastjson.JSON;
 
-public class RequestDTOTest {
+public class MD5RequestDTOTest {
 
 	static String appId = "oa";
 	static String secret = "EAFLKYTRHLJLTRKGYUOJ54BNRF70HJU5NGF8";

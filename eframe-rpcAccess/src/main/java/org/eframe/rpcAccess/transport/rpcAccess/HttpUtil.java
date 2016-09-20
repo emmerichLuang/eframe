@@ -1,4 +1,4 @@
-package org.eframe.spider.httpclient;
+package org.eframe.rpcAccess.transport.rpcAccess;
 
 import java.security.KeyManagementException;
 import java.security.KeyStore;
@@ -31,6 +31,7 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.TrustStrategy;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -42,6 +43,10 @@ import org.eframe.util.CommonLog;
 
 public class HttpUtil {
 
+	public static int SocketTimeout = 6000;//3秒
+	public static int ConnectTimeout = 6000;//3秒
+	public static Boolean SetTimeOut = true;
+	
 	/**
 	 * 获取httpClient对象。 这个对象可以支持https。
 	 * @param https
@@ -108,10 +113,10 @@ public class HttpUtil {
 		
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
 		
-		if (Config.SetTimeOut) {
+		if (SetTimeOut) {
 			RequestConfig requestConfig = RequestConfig.custom()
-					.setSocketTimeout(Config.SocketTimeout)
-					.setConnectTimeout(Config.ConnectTimeout).build();//设置请求和传输超时时间
+					.setSocketTimeout(SocketTimeout)
+					.setConnectTimeout(ConnectTimeout).build();//设置请求和传输超时时间
 			httpGet.setConfig(requestConfig);
 		}
 		try {
@@ -133,6 +138,52 @@ public class HttpUtil {
 		} 
 		return responseBody;
 	}
+
+	/**
+	 * post提交json字符串
+	 * @param httpClient
+	 * @param url
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 * @param
+	 */
+	public static String postJson(CloseableHttpClient httpClient, String url, String jsonContent) throws Exception {
+		String responseBody = "";
+		Integer status = null;
+		HttpPost post = new HttpPost(url);
+		
+		if (SetTimeOut) {
+			RequestConfig requestConfig = RequestConfig.custom()
+					.setSocketTimeout(SocketTimeout)
+					.setConnectTimeout(ConnectTimeout).build();//设置请求和传输超时时间
+			post.setConfig(requestConfig);
+		}
+		/*post.addHeader("User-Agent", 
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36");*/
+
+		StringEntity s = new StringEntity(jsonContent);  
+        s.setContentEncoding("UTF-8");  
+        s.setContentType("application/json");  
+        post.setEntity(s);
+		
+		try {
+			//请求数据
+			CloseableHttpResponse response = httpClient.execute(post);
+			status = response.getStatusLine().getStatusCode();
+			if (status == HttpStatus.SC_OK) {
+				HttpEntity entity = response.getEntity();
+				//
+				responseBody = EntityUtils.toString(entity,Consts.UTF_8);
+			} else {
+				CommonLog.error("http return status error:" + status);
+				throw new ClientProtocolException("Unexpected response status: " + status);
+			}
+		} catch (Exception ex) {
+			CommonLog.error(ex, "get请求错误！ url："+url);
+		} 
+		return responseBody;
+	}	
 	
 	/**
 	 * post提交
@@ -148,14 +199,14 @@ public class HttpUtil {
 
 		HttpPost post = new HttpPost(url);
 		
-		if (Config.SetTimeOut) {
+		if (SetTimeOut) {
 			RequestConfig requestConfig = RequestConfig.custom()
-					.setSocketTimeout(Config.SocketTimeout)
-					.setConnectTimeout(Config.ConnectTimeout).build();//设置请求和传输超时时间
+					.setSocketTimeout(SocketTimeout)
+					.setConnectTimeout(ConnectTimeout).build();//设置请求和传输超时时间
 			post.setConfig(requestConfig);
 		}
-		post.addHeader("User-Agent", 
-				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36");
+		/*post.addHeader("User-Agent", 
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36");*/
 
 		if(params!=null && params.size()>0){
 			List<NameValuePair> formparams = new ArrayList<NameValuePair>();
@@ -179,8 +230,7 @@ public class HttpUtil {
 				throw new ClientProtocolException("Unexpected response status: " + status);
 			}
 		} catch (Exception ex) {
-			System.err.println("get请求错误！ url："+url);
-			CommonLog.error(ex, "get请求错误！ url："+url);
+			CommonLog.error(ex, "post请求错误！ url："+url);
 		} 
 		return responseBody;
 	}	
@@ -191,10 +241,10 @@ public class HttpUtil {
 
 		HttpGet httpGet = new HttpGet(url);
 		
-		if (Config.SetTimeOut) {
+		if (SetTimeOut) {
 			RequestConfig requestConfig = RequestConfig.custom()
-					.setSocketTimeout(Config.SocketTimeout)
-					.setConnectTimeout(Config.ConnectTimeout).build();//设置请求和传输超时时间
+					.setSocketTimeout(SocketTimeout)
+					.setConnectTimeout(ConnectTimeout).build();//设置请求和传输超时时间
 			httpGet.setConfig(requestConfig);
 		}
 		httpGet.addHeader("User-Agent", 
@@ -215,7 +265,6 @@ public class HttpUtil {
 				throw new ClientProtocolException("Unexpected response status: " + status);
 			}
 		} catch (Exception ex) {
-			System.err.println("get请求错误！ url："+url);
 			CommonLog.error(ex, "get请求错误！ url："+url);
 		} 
 		return responseBody;
