@@ -8,7 +8,7 @@ import redis.clients.jedis.Jedis;
 
 public class JedisTest {
 	public static void main(String[] args){
-		final String ipAddr = "aliyun.9game.cn";
+		final String ipAddr = "127.0.0.1";
 	    final int port = 6379;
 	    Jedis jedis = JedisHelper.getInstance().getJedis(ipAddr, port,"liangEE");
 	    

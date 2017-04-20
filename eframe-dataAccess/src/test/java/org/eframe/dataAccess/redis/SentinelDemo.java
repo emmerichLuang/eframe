@@ -13,8 +13,8 @@ public class SentinelDemo {
 	public static void main(String[] args) {
 
 		Set<String> sentinels = new HashSet<String>();
-		sentinels.add("120.25.161.235:26379");
-		sentinels.add("120.25.161.235:26389");
+		sentinels.add("127.0.0.1:26379");
+		sentinels.add("127.0.0.1:26389");
 		
 		// "liangEE"
 		//sentinel 自己另外有password的！
