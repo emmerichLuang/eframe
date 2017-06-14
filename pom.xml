@@ -14,13 +14,13 @@
     <module>eframe-priority</module>
     <module>eframe-fullTextSearch</module>
     <module>eframe-account</module>
+    <module>talk</module>
   </modules>
   
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>  
   
-	<!-- modules被直接使用的依赖 -->
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -37,7 +37,6 @@
 		
 	</dependencies>	
 	
-	<!-- 只是声明了，module们没直接使用的依赖-->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
