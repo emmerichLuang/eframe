@@ -15,6 +15,11 @@ public class BizException extends RuntimeException{
 	private String msg;
 	private boolean flag = false;
 	
+	public BizException(String code, String msg){
+		this.code=code;
+		this.msg=msg;
+	}
+	
 	public Object getData() {
 		return data;
 	}
