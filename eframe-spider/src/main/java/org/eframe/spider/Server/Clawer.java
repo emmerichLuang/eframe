@@ -150,7 +150,7 @@ public class Clawer {
 	/**
 	 * 首次执行
 	 * 
-	 * @param url
+	 * @param baseUrl
 	 * @throws IOException
 	 */
 	private void execFirst() throws Exception {

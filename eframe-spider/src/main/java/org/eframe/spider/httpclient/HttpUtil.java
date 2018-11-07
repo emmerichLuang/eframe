@@ -26,8 +26,8 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
-import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.TrustStrategy;
@@ -56,6 +56,20 @@ public class HttpUtil {
 			return client;
 		}
 		
+		/*HttpComponentsHttpInvokerRequestExecutor httpInvokerRequestExecutor = new HttpComponentsHttpInvokerRequestExecutor();
+
+		SSLContext sslcontext= SSLContexts.custom().loadTrustMaterial(null,
+		            new TrustSelfSignedStrategy()).build();
+
+		// Allow TLSv1.2 protocol, use NoopHostnameVerifier to trust self-singed cert
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext,
+		        new String[] { "TLSv1" , "TLSv1.1", "TLSv1.2"  }, null, new NoopHostnameVerifier());
+
+
+		CloseableHttpClient httpClient = HttpClients.custom().
+		            setSSLSocketFactory(sslsf).build();
+		httpInvokerRequestExecutor.setHttpClient(httpClient);*/
+		
 		RegistryBuilder<ConnectionSocketFactory> registryBuilder = RegistryBuilder.<ConnectionSocketFactory>create();
 		registryBuilder.register("http", new PlainConnectionSocketFactory());
 		try {
@@ -66,7 +80,9 @@ public class HttpUtil {
 				}
 			}).build();
 			
-			LayeredConnectionSocketFactory sslSF = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			//LayeredConnectionSocketFactory sslSF = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			SSLConnectionSocketFactory sslSF = new SSLConnectionSocketFactory(sslContext,
+			        new String[] { "TLSv1" , "TLSv1.1", "TLSv1.2"  }, null, new NoopHostnameVerifier());			
 			registryBuilder.register("https", sslSF);
 		} catch (KeyStoreException e) {
 			throw new RuntimeException(e);
