@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<configuration>  
+	<property resource="application.properties"></property>
+    <!-- 文件路径 -->  
+  	<property name="LOG_BASE_PATH" value="${log.base.path}" /> 
+    <!-- 级别 -->  
+  	<property name="LOG_LEVEL" value="${log.level}" />
+    <!-- 文件输出格式 -->  
+    <property name="LOG_PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
+  
+	<appender name="root-console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder charset="UTF-8">
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	<appender name="root-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_BASE_PATH}/oCloud.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_BASE_PATH}/ocloud.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${LOG_PATTERN}</pattern>
+		</layout>
+		<encoder charset="UTF-8">
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>		
+	</appender>
+
+	<appender name="sql-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_BASE_PATH}/sql.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_BASE_PATH}/sql.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${LOG_PATTERN}</pattern>
+		</layout>
+		<encoder charset="UTF-8">
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>		
+	</appender>
+
+	<appender name="rpc-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_BASE_PATH}/rpc.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_BASE_PATH}/rpc.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${LOG_PATTERN}</pattern>
+		</layout>
+		<encoder charset="UTF-8">
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>		
+	</appender>
+
+	<!-- 第三方代码日志 -->
+	<root level="info">
+		<appender-ref ref="root-console" />
+		<appender-ref ref="root-file" />
+	</root>
+	
+	<!-- 本项目日志 --> 
+	<logger name="com" level="${LOG_LEVEL}" additivity="false">
+		<appender-ref ref="root-console" />
+		<appender-ref ref="root-file" />
+	</logger>
+	
+	
+	<logger name="sql" level="${LOG_LEVEL}" additivity="false">
+		<appender-ref ref="root-console" />
+		<appender-ref ref="sql-file" />
+	</logger>
+	
+	<!-- 网关组件， 专门把http的请求响应打印出来了 -->
+	<logger name="rpcLog" level="${LOG_LEVEL}" additivity="false">
+		<appender-ref ref="root-console" />
+		<appender-ref ref="rpc-file" />
+	</logger>	
+	
+</configuration>
