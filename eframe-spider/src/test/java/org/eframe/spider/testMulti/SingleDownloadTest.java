@@ -16,7 +16,7 @@ public class SingleDownloadTest {
 	static String serverPath = "https://github.com/emmerichLuang/solo/archive/master.zip";
 	static String destPath = "E://";
 	
-	static int BUFFER_SIZE = 1024*1024*1024;
+	static int BUFFER_SIZE = 1024*1024;	//1024就是1K，2个就是1M
 	
 	public static void main(String[] args) throws Exception, IOException {
 		//http调试信息  慢很多的

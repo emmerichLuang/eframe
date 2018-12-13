@@ -14,7 +14,6 @@
     <module>eframe-priority</module>
     <module>eframe-fullTextSearch</module>
     <module>eframe-account</module>
-    <module>talk</module>
   </modules>
   
 	<properties>

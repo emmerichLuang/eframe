@@ -1,33 +1,27 @@
 package org.eframe.spider.testMulti;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.UUID;
 
 import org.eframe.spider.httpclient.MutiThreadDownLoad;
 
 public class MultiDownloadTest {
+	
+	static String serverPath = "https://github.com/emmerichLuang/solo/archive/master.zip";
+	static String destPath = "E://";
+	
+	static int threadSize = 4;
 	/**
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-		//http调试信息
-		System.setProperty("javax.net.debug", "all");
+		
+		String localPath = destPath+UUID.randomUUID()+".zip";
 
-		int threadSize = 4;
-		String serverPath = "https://github.com/emmerichLuang/solo/archive/master.zip";
-		String localPath = "E://master.zip";
-
-		CountDownLatch latch = new CountDownLatch(threadSize);
-
-		MutiThreadDownLoad m = new MutiThreadDownLoad(threadSize, serverPath, localPath, latch);
+		MutiThreadDownLoad m = new MutiThreadDownLoad(threadSize, serverPath, localPath);
 		long startTime = System.currentTimeMillis();
-		try {
-			m.executeDownLoad();
-			latch.await();// 等待所有的线程执行完毕
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		m.executeDownLoad();
 		long endTime = System.currentTimeMillis();
 		System.out.println("全部下载结束,共耗时" + (endTime - startTime) / 1000 + "s");
 	}

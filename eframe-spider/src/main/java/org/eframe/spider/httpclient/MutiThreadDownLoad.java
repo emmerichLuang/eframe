@@ -2,10 +2,9 @@ package org.eframe.spider.httpclient;
 
 import java.io.InputStream;
 import java.io.RandomAccessFile;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -29,15 +28,15 @@ public class MutiThreadDownLoad {
      */
     private CountDownLatch latch;
  
-    public MutiThreadDownLoad(int threadCount, String serverPath, String localPath, CountDownLatch latch) {
+    public MutiThreadDownLoad(int threadCount, String serverPath, String localPath) {
         this.threadCount = threadCount;
         this.serverPath = serverPath;
         this.localPath = localPath;
-        this.latch = latch;
+        this.latch = new CountDownLatch(threadCount);
     }
  
     public void executeDownLoad() {
-    	
+		
         try {
         	CloseableHttpClient client = HttpUtil.getHttpClient(true);
         	
@@ -45,11 +44,16 @@ public class MutiThreadDownLoad {
             HttpResponse response = client.execute(httpget);
             HttpEntity entity = response.getEntity();
         	
-        	
             int code = response.getStatusLine().getStatusCode();
             if (code == 200) {
                 //服务器返回的数据的长度，实际上就是文件的长度,单位是字节
+                //long length = entity.getContentLength();
                 long length = entity.getContentLength();
+            	
+                /*for(Header header: response.getAllHeaders()){
+                	System.err.println(header.toString());
+                }*/
+                
                 System.out.println("文件总长度:" + length + "字节(B)");
                 RandomAccessFile raf = new RandomAccessFile(localPath, "rwd");
                 //指定创建的文件的长度
@@ -68,7 +72,7 @@ public class MutiThreadDownLoad {
                     System.out.println("线程" + threadId + "下载:" + startIndex + "字节~" + endIndex + "字节");
                     new DownLoadThread(threadId, startIndex, endIndex).start();
                 }
- 
+                latch.await();// 等待所有的线程执行完毕
             }
  
         } catch (Exception e) {
