@@ -58,6 +58,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
@@ -225,7 +231,7 @@
 		<log.base.path>E:/Temp</log.base.path>
 		<log.level>info</log.level>
 
-		<datasource.mysql.url>jdbc:mysql://localhost:3306/eframe-sb?useUnicode=true&amp;amp;characterEncoding=utf8&amp;amp;autoReconnect=true</datasource.mysql.url>
+		<datasource.mysql.url>jdbc:mysql://aliyun.mine.com:3306/eframe-sb?useUnicode=true&amp;amp;characterEncoding=utf8&amp;amp;autoReconnect=true</datasource.mysql.url>
 		<datasource.mysql.user>root</datasource.mysql.user>
 		<datasource.mysql.passwd>root</datasource.mysql.passwd>
 		<datasource.mysql.driverClassName>com.mysql.jdbc.Driver</datasource.mysql.driverClassName>

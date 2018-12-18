@@ -1,0 +1,33 @@
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author liangrl
+ * @date   $date
+ *
+ */
+@Component
+@Table(name="$TBName")
+public class $DDLName implements Serializable{
+ 
+ 	private static final long serialVersionUID = 1L;
+ 	
+ 	#foreach ($temp in $columnList)	
+	#if($temp.isPK())
+
+	@Id
+	#end
+	@Column(name = "$temp.getdBFieldName()")
+	private $temp.getFieldType() $temp.getFieldName();
+	
+	#end
+ 	
+ 	
+}

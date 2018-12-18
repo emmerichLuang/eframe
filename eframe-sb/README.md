@@ -22,5 +22,7 @@ okhttp、httpclient？
 ## pom.xml
 1. log.base.path设置一个目录。
 2. log.level 根据实际情况配置。研发环境可以debug，生产环境建议info。
+3. aliyun.mine.com 配置为自己的数据库配置
 
 ## 数据库
+
