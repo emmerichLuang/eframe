@@ -1,3 +1,9 @@
+#if($!{packageName})
+package $packageName;
+#end
+
+
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,15 +25,26 @@ public class $DDLName implements Serializable{
  
  	private static final long serialVersionUID = 1L;
  	
- 	#foreach ($temp in $columnList)	
-	#if($temp.isPK())
-
-	@Id
-	#end
+ 	#foreach ($temp in $columnList)
+	#if($temp.isPK())@Id#end
+	
 	@Column(name = "$temp.getdBFieldName()")
 	private $temp.getFieldType() $temp.getFieldName();
 	
 	#end
  	
+ 	/************ getter and setter **************/
+ 	
+	#foreach ($temp in $columnList)
+	
+	public $temp.getFieldType() get$temp.getFirsetLetterUppercaseFieldName()(){
+		return this.$temp.getFieldName();
+	}
+	
+	public void set$temp.getFirsetLetterUppercaseFieldName()($temp.getFieldType() $temp.getFieldName()){
+		this.$temp.getFieldName() = $temp.getFieldName();
+	}
+	
+	#end
  	
 }

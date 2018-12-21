@@ -44,6 +44,11 @@ public class VelocityColumn {
 		return fieldName;
 	}
 
+	public String getFirsetLetterUppercaseFieldName(){
+		String result = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);;
+		return result ;
+	}
+	
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
 	}
