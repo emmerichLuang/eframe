@@ -1,5 +1,12 @@
 package com;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Enumeration;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -58,7 +65,7 @@ public class Application extends SpringBootServletInitializer{
 	}
 	
 	//必须要这个配置， 否则有AbandonedConnectionCleanupThread 导致内存溢出
-    /*@Bean
+    @Bean
     protected ServletContextListener listener() {
 
         return new ServletContextListener() {
@@ -83,9 +90,9 @@ public class Application extends SpringBootServletInitializer{
 
                 ClassLoader cl = Thread.currentThread().getContextClassLoader();
 
-                Enumeration<Driver> drivers = DriverManager.getDrivers();
+                Enumeration<java.sql.Driver> drivers = DriverManager.getDrivers();
                 while (drivers.hasMoreElements()) {
-                    Driver driver = drivers.nextElement();
+                	java.sql.Driver driver = drivers.nextElement();
 
                     if (driver.getClass().getClassLoader() == cl) {
 
@@ -103,7 +110,7 @@ public class Application extends SpringBootServletInitializer{
                 }
             }
         };
-    }*/
+    }
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

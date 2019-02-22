@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -140,7 +141,7 @@ public class ReflectMapper {
 	}
 	
 	/**
-	 * 
+	 * key是 entity的字段名； value是数据库字段名（注解）
 	 * @param clazz
 	 * @return
 	 */
@@ -200,24 +201,28 @@ public class ReflectMapper {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T mapEntity(Class<T> clazz, Map<String, Object> jdbcMapResult) throws Exception {
-		// 获得
+		// javaEntity 字段对数据库字段的映射
 		Map<String, String> fieldHasColumnAnnoMap = getFieldMapByClazz(clazz);
 		
 		// 存放field name 和 对应的来自map的该field的属性值，用于后续reflect成ModelBean
 		Map<String, Object> conCurrent = new LinkedHashMap<String, Object>();
-		for (Map.Entry<String, String> en : fieldHasColumnAnnoMap.entrySet()) {
-			// 将column大写。因为jdbcMapResult key is UpperCase
-			String key = en.getValue();
+		for (String key : fieldHasColumnAnnoMap.keySet()) {
+			String columnName = fieldHasColumnAnnoMap.get(key);
 
 			// 获得map的该field的属性值
-			Object value = jdbcMapResult.get(key);
+			Object value = jdbcMapResult.get(columnName);
 
 			// 确保value有效性，防止JSON reflect时异常
 			if (value != null) {
-				conCurrent.put(en.getKey(), jdbcMapResult.get(key));
+				conCurrent.put(key, jdbcMapResult.get(columnName));
 			}
 		}
-		String temp = JacksonUtil.encode(conCurrent);
-		return (T) JacksonUtil.decode(temp, clazz);
+		
+		T instance = clazz.newInstance();
+		BeanUtils.populate(instance, conCurrent);
+		
+		return instance;
+		//String temp = JacksonUtil.encode(conCurrent);
+		//return (T) JacksonUtil.decode(temp, clazz);
 	}
 }

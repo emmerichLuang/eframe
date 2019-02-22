@@ -27,6 +27,13 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- apache很小的一个工具类， resultSet处理， 简单的dao操作。 用于读外部的数据源、test包处理。 -->
+		<dependency>
+		  <groupId>commons-dbutils</groupId>
+		  <artifactId>commons-dbutils</artifactId>
+		  <version>1.7</version>
+		</dependency>	
+	
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
@@ -138,8 +145,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.3</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -188,6 +194,18 @@
 
 
 	<profiles>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<!-- druid -->
+				<druid.enabled>true</druid.enabled>
+				<druid.allow></druid.allow>
+				<druid.deny></druid.deny>
+				<druid.loginUsername>EE-sb</druid.loginUsername>
+				<druid.loginPassword>EE-sb$</druid.loginPassword>
+				<druid.resetEnable>false</druid.resetEnable>	
+			</properties>
+		</profile>
 	</profiles>
 
 	<build>
@@ -239,7 +257,7 @@
 		<log.base.path>E:/Temp</log.base.path>
 		<log.level>info</log.level>
 
-		<datasource.mysql.url>jdbc:mysql://aliyun.mine.com:3306/eframe-sb?useUnicode=true&amp;amp;characterEncoding=utf8&amp;amp;autoReconnect=true</datasource.mysql.url>
+		<datasource.mysql.url>jdbc:mysql://aliyun.9game.cn:3306/eframe-sb?useUnicode=true&amp;amp;characterEncoding=utf8&amp;amp;autoReconnect=true</datasource.mysql.url>
 		<datasource.mysql.user>root</datasource.mysql.user>
 		<datasource.mysql.passwd>eeqq</datasource.mysql.passwd>
 		<datasource.mysql.driverClassName>com.mysql.jdbc.Driver</datasource.mysql.driverClassName>
@@ -247,6 +265,14 @@
 		<datasource.minIdle>5</datasource.minIdle>
 		<datasource.maxActive>20</datasource.maxActive>
 
+		<!-- druid -->
+		<druid.enabled>true</druid.enabled>
+		<druid.allow></druid.allow>
+		<druid.deny></druid.deny>
+		<druid.loginUsername>EE-sb</druid.loginUsername>
+		<druid.loginPassword>EE-sb$</druid.loginPassword>
+		<druid.resetEnable>false</druid.resetEnable>		
+		
 	</properties>
 
 </project>
