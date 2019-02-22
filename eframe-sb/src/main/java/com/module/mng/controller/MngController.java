@@ -7,11 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/mng")
+@RequestMapping("/mng/*")
 public class MngController {
 	
 	@RequestMapping("/login")
 	public String login(Model model, HttpServletResponse response) {
-	    return "/login";
+	    return "/mng/login";
 	}
 }
