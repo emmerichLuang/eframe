@@ -27,6 +27,31 @@
 	</dependencyManagement>
 
 	<dependencies>
+	
+		<!-- <dependency>
+			<groupId>uc.jws</groupId>
+			<artifactId>jws</artifactId>
+			<version>1.5.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/localLib/jws-1.5.2.2.jar</systemPath>
+		</dependency> -->
+	
+		<!-- 网关组件 -->
+		<dependency>
+			<groupId>com.duowan.yy</groupId>
+			<artifactId>gateway-component</artifactId>
+			<version>0.1.2-YYViewer</version>
+			<!-- <classifier>YYViewer</classifier> -->
+			<scope>system</scope>
+			<systemPath>${project.basedir}/localLib/gateway-component-0.1.2.jar</systemPath>			
+		</dependency>	
+		<dependency>
+		    <groupId>commons-httpclient</groupId>
+		    <artifactId>commons-httpclient</artifactId>
+		    <version>3.1</version>
+		</dependency>	
+	
+	
 		<!-- apache很小的一个工具类， resultSet处理， 简单的dao操作。 用于读外部的数据源、test包处理。 -->
 		<dependency>
 		  <groupId>commons-dbutils</groupId>
@@ -175,6 +200,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- 热部署模块 -->
@@ -263,7 +289,8 @@
 		<log.base.path>E:/Temp</log.base.path>
 		<log.level>info</log.level>
 
-		<datasource.mysql.url>jdbc:mysql://aliyun.9game.cn:3306/eframe-sb?useUnicode=true&amp;amp;characterEncoding=utf8&amp;amp;autoReconnect=true</datasource.mysql.url>
+		<!-- characterEncoding=utf8&amp;amp; -->
+		<datasource.mysql.url>jdbc:mysql://aliyun.9game.cn:3306/eframe_sb?useUnicode=true&amp;amp;autoReconnect=true</datasource.mysql.url>
 		<datasource.mysql.user>root</datasource.mysql.user>
 		<datasource.mysql.passwd>eeqq</datasource.mysql.passwd>
 		<datasource.mysql.driverClassName>com.mysql.jdbc.Driver</datasource.mysql.driverClassName>

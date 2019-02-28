@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import com.base.ex.EntityNoMappingException;
-import com.base.util.JacksonUtil;
 
 
 /**
@@ -98,6 +97,7 @@ public class ReflectMapper {
 	}
 	
 	/**
+	 * TODO: 调用这个
 	 * 参数是 Table注解了的ddl
 	 * 初始化所有的ddl字段对应数据表字段
 	 * @param clazzList

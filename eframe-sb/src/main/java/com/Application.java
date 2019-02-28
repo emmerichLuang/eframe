@@ -103,7 +103,6 @@ public class Application extends SpringBootServletInitializer{
                         } catch (SQLException ex) {
                         	logger.error("Error deregistering JDBC driver {}", driver, ex);
                         }
-
                     } else {
                     	logger.trace("Not deregistering JDBC driver {} as it does not belong to this webapp's ClassLoader", driver);
                     }

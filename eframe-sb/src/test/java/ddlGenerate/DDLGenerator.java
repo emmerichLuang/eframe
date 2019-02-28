@@ -26,12 +26,12 @@ import db.DBBaseTest;
 @SpringBootTest(classes = Application.class)
 public class DDLGenerator extends DBBaseTest{
 
-private static String tableName = "user_admin_roleset";
+private static String tableName = "user_auth_local";
 	
-	private static String ddlName = "AdminRoleSet";
+	private static String ddlName = "UserAuthLocal";
 	
-	private static String ddlFolder = "E:/workspace/eframe/eframe-sb/src/main/java/com/module/employee/entity/";
-	private static String packageName = "com.module.employee.entity";
+	private static String ddlFolder = "E:/workspace/eframe/eframe-sb/src/main/java/com/module/auth/entity/";
+	private static String packageName = "com.module.auth.entity";
 	//生成文件
 	@Test
     public void generateDDLFileCase() throws Exception{

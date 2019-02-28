@@ -179,7 +179,7 @@ public abstract class AbstractDao {
 	 * 
 	 * @param clazz
 	 * @param entity
-	 * @param ignoreId	是否不插入主键
+	 * @param ignoreId	如果数据表主键自增， 可以true；建议还是设置为false，手动生成主键
 	 * @throws  
 	 * @throws Exception 
 	 */
