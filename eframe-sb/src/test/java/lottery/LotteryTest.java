@@ -12,6 +12,12 @@ import com.base.collection.Node;
 
 import db.DBBaseTest;
 
+/**
+ * 约瑟夫问题有关
+ * @Date 2019年3月5日
+ * @author E.E.
+ *
+ */
 @SpringBootTest(classes = Application.class)
 public class LotteryTest extends DBBaseTest{
 

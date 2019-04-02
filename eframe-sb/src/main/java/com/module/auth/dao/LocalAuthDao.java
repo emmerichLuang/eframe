@@ -17,5 +17,9 @@ public class LocalAuthDao extends AbstractDao{
 		String sql = "insert into user_auth_local(id, user_id, password) values(?,?,?) ";
 		
 		this.update(sql, GUID.nextUUID(), userId, encyptPwd);
+		
 	}
+	
+	
+	
 }

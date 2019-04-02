@@ -1,0 +1,29 @@
+package ${basePackage}.${moduleName}.dao;
+
+import com.base.dao.AbstractDao;
+import com.base.util.GUID;
+import org.springframework.stereotype.Component;
+import ${basePackage}.${moduleName}.entity.$className;
+
+/**
+ * by E.E's code Generator
+ * @author liangrl
+ * @date   $date
+ *
+ */
+@Component
+public class $daoName extends AbstractDao{
+
+	
+	/**
+	 * create
+	 * @param entity
+	 * @throws Exception
+	 */
+	public void create($className entity) throws Exception{
+		super.insert(${className}.class, entity, false);
+	}
+
+
+	
+}

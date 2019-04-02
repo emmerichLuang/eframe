@@ -26,7 +26,7 @@ import db.DBBaseTest;
 @SpringBootTest(classes = Application.class)
 public class DDLGenerator extends DBBaseTest{
 
-private static String tableName = "user_auth_local";
+	private static String tableName = "user_auth_local";
 	
 	private static String ddlName = "UserAuthLocal";
 	

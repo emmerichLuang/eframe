@@ -16,4 +16,7 @@ public class LocalAuthService {
 		String encyptPwd = EncyptUtil.md5Encypt(password);
 		authDao.createAuth(userId, encyptPwd);
 	}
+	
+	
+	
 }
