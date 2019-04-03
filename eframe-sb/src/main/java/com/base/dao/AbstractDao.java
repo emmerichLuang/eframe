@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.base.util.JacksonUtil;
 
 public abstract class AbstractDao {
+
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 	
@@ -135,7 +136,6 @@ public abstract class AbstractDao {
 		
 		return result;
 	}
-	
 	
 	/**
 	 * 批量插入

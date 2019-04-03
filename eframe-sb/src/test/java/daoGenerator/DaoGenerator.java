@@ -15,21 +15,37 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.Application;
+import com.module.employee.entity.AdminRoleSet;
 
 import db.DBBaseTest;
 
+/**
+ * 生成简单dao
+ * @Date 2019年4月3日
+ * @author E.E.
+ *
+ */
 @SpringBootTest(classes = Application.class)
 public class DaoGenerator extends DBBaseTest{
-
 	private static String moduleName = "employee";		//某个module包名，驼峰
-	private static String className = "AdminRoleSet";	//需要首字母大写
+	
+	private static Class clazz = AdminRoleSet.class;
+	
+	private static String className = clazz.getSimpleName();	
 	
 	private static String basePackage = "com.module";	//.xx.dao
 	private static String baseFolder = "E:/workspace/eframe/eframe-sb/src/main/java/com/module/";	//xx/dao/
 	
+	
+	private static String daoName =className+"Dao";	//需要首字母大写
+	static{
+		daoName = (new StringBuilder()).append(Character.toUpperCase(daoName.charAt(0))).append(daoName.substring(1)).toString();		
+	}
+
 	@Test
     public void generateDaoFileCase() throws Exception{
 
+		
 		String content = this.generateFileStr();
 		
 		File daoFolder = new File(baseFolder+moduleName+"/dao/");
@@ -37,7 +53,7 @@ public class DaoGenerator extends DBBaseTest{
 			daoFolder.mkdirs();//比mkdir 更好，创建虚拟目录
 		}
 		
-		File f = new File(baseFolder+moduleName+"/dao/"+className+"Dao.java");
+		File f = new File(baseFolder+moduleName+"/dao/"+daoName+".java");
 		if(f.exists()){
 			System.err.println("重建文件！");
 		}
@@ -59,8 +75,6 @@ public class DaoGenerator extends DBBaseTest{
 		String currentDateStr = sdf.format(new Date());
 		
 		//首字母大写
-		String daoName =className+"Dao";
-		daoName = (new StringBuilder()).append(Character.toUpperCase(daoName.charAt(0))).append(daoName.substring(1)).toString();
 		ctx.put("daoName", daoName);
 		ctx.put("className", className);
 		ctx.put("date", currentDateStr);

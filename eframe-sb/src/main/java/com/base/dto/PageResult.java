@@ -1,14 +1,7 @@
-package init.emp;
+package com.base.dto;
 
 import java.util.List;
 
-/**
- * 分页数据
- * @author liangrl
- * @date   2016年7月14日
- * 
- * @param <T>
- */
 public class PageResult<T> {
 
 	private Integer pageSize;			//一页多少条
@@ -64,5 +57,4 @@ public class PageResult<T> {
 		this.currentPageNo = currentPage;
 		return this;
 	}
-	
 }

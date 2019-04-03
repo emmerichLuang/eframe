@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.base.entity.BaseEntity;
+
 /**
  * 
  * @author liangrl
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Table(name = "user_admin_roleset")
-public class AdminRoleSet implements Serializable {
+public class AdminRoleSet extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

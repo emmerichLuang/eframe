@@ -1,52 +1,63 @@
-package ${basePackage}.${moduleName}.dao;
+package com.module.employee.dao;
 
 import com.base.dao.AbstractDao;
 import com.base.util.GUID;
+
 import org.springframework.stereotype.Component;
-import ${basePackage}.${moduleName}.entity.$className;
+import org.springframework.util.StringUtils;
+
+import com.module.employee.entity.AdminRoleSet;
 import com.base.dto.BaseDto;
 import com.base.dto.PageResult;
 import com.base.dto.Pager;
 import com.base.dto.WhereCond;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * by E.E's code Generator
  * @author liangrl
- * @date   $date
+ * @date   2019-04-03
  *
  */
 @Component
-public class $daoName extends AbstractDao{
+public class AdminRoleSetDao extends AbstractDao{
 
 	
 	/**
-	 * return primary key
+	 * 返回主键
 	 * @param entity
+	 * @return
 	 * @throws Exception
 	 */
-	public String create($className entity) throws Exception{
+	public String create(AdminRoleSet entity) throws Exception{
 		if(StringUtils.isEmpty(entity.getId())){
 			entity.setId(GUID.nextUUID());
-		}	
-		super.insert(${className}.class, entity, false);
+		}
+		super.insert(AdminRoleSet.class, entity, false);
 		
-		return entity.getId(); 
+		return entity.getId();
 	}
 
 	/**
-	 * delete by primary key
+	 * delete
 	 * @param entity
 	 * @throws Exception
 	 */
-	public void delete($className entity) throws Exception{
-		super.del(${className}.class, entity.getId());
+	public void delete(AdminRoleSet entity) throws Exception{
+		super.del(AdminRoleSet.class, entity.getId());
 	}
-
-		
-	public PageResult<${className}> getPage(${className} entity, BaseDto dto, Pager pager){
-		PageResult<${className}> result = new PageResult<${className}>();
+	
+	/**
+	 * 
+	 * @param entity
+	 * @param dto
+	 * @param pager
+	 * @return
+	 */
+	public PageResult<AdminRoleSet> getPage(AdminRoleSet entity, BaseDto dto, Pager pager){
+		PageResult<AdminRoleSet> result = new PageResult<AdminRoleSet>();
 		
 		Integer currentPageNo = null;
 		if(dto.currentPageNo==null){
@@ -60,7 +71,7 @@ public class $daoName extends AbstractDao{
 		pager.setPageNo(currentPageNo);
 		pager.setPageSize(BaseDto.defaultPageSize);
 		
-		List<${className}> list= this.getList(entity, dto, pager);
+		List<AdminRoleSet> list= this.getList(entity, dto, pager);
 		Integer count = this.getCount(entity, dto);
 		
 		result.setCurrentPageNo(currentPageNo);
@@ -71,18 +82,18 @@ public class $daoName extends AbstractDao{
 		return result;
 	}
 	
-	public Integer update(${className} entity){
+	public Integer update(AdminRoleSet entity){
 		//TODO:
 		return 0;
 	}
 	
-	public Integer getCount(${className} entity, BaseDto dto){
+	public Integer getCount(AdminRoleSet entity, BaseDto dto){
 		this.appendWhereCond(entity, dto);
 		//TODO:
 		return 0;
 	}
 	
-	public List<${className}> getList(${className} entity, BaseDto dto, Pager pager){
+	public List<AdminRoleSet> getList(AdminRoleSet entity, BaseDto dto, Pager pager){
 		this.appendWhereCond(entity, dto);
 		//Integer offset = pager.getPageNo()==1?0:(pager.getPageNo()-1)*BaseDto.defaultPageSize;
 		
@@ -90,8 +101,7 @@ public class $daoName extends AbstractDao{
 		return null;
 	}
 	
-
-	private WhereCond appendWhereCond(${className} entity, BaseDto dto){
+	private WhereCond appendWhereCond(AdminRoleSet entity, BaseDto dto){
 		StringBuilder where = new StringBuilder();
 		
 		List<Object> params = new ArrayList<Object>();
