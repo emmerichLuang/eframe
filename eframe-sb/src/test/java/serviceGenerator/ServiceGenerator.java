@@ -1,4 +1,4 @@
-package daoGenerator;
+package serviceGenerator;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -19,28 +19,24 @@ import com.module.employee.entity.AdminRoleSet;
 
 import db.DBBaseTest;
 
-/**
- * 生成简单dao
- * @Date 2019年4月3日
- * @author E.E.
- *
- */
 @SpringBootTest(classes = Application.class)
-public class DaoGenerator extends DBBaseTest{
-	
+public class ServiceGenerator extends DBBaseTest{
 	private static String moduleName = "employee";		//某个module包名，驼峰
 	
 	private static Class clazz = AdminRoleSet.class;
-	
 	private static String className = clazz.getSimpleName();	
 	
-	private static String basePackage = "com.module";	//.xx.dao
-	private static String baseFolder = "E:/workspace/eframe/eframe-sb/src/main/java/com/module/";	//xx/dao/
+	private static String basePackage = "com.module";	//.xx.service
+	private static String baseFolder = "E:/workspace/eframe/eframe-sb/src/main/java/com/module/";	//xx/service/
 	
 	
-	private static String daoName =className+"Dao";	//需要首字母大写
+	
+	//需要首字母大写
+	private static String daoName =className+"Dao";	
+	private static String serviceName =className+"Service";	
 	static{
 		daoName = (new StringBuilder()).append(Character.toUpperCase(daoName.charAt(0))).append(daoName.substring(1)).toString();		
+		serviceName = (new StringBuilder()).append(Character.toUpperCase(serviceName.charAt(0))).append(serviceName.substring(1)).toString();		
 	}
 
 	@Test
@@ -49,12 +45,12 @@ public class DaoGenerator extends DBBaseTest{
 		
 		String content = this.generateFileStr();
 		
-		File daoFolder = new File(baseFolder+moduleName+"/dao/");
-		if(!daoFolder.exists()){
-			daoFolder.mkdirs();//比mkdir 更好，创建虚拟目录
+		File serviceFolder = new File(baseFolder+moduleName+"/service/");
+		if(!serviceFolder.exists()){
+			serviceFolder.mkdirs();//比mkdir 更好，创建虚拟目录
 		}
 		
-		File f = new File(baseFolder+moduleName+"/dao/"+daoName+".java");
+		File f = new File(baseFolder+moduleName+"/service/"+serviceName+".java");
 		if(f.exists()){
 			System.err.println("重建文件！");
 		}
@@ -69,7 +65,7 @@ public class DaoGenerator extends DBBaseTest{
 
 		ve.init();
 
-		Template t = ve.getTemplate("daoTemplate.vm");
+		Template t = ve.getTemplate("serviceTemplate.vm");
 		VelocityContext ctx = new VelocityContext();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -77,11 +73,12 @@ public class DaoGenerator extends DBBaseTest{
 		
 		//首字母大写
 		ctx.put("daoName", daoName);
+		ctx.put("serviceName", serviceName);
 		ctx.put("className", className);
 		ctx.put("date", currentDateStr);
 		ctx.put("moduleName", moduleName);
 		
-		String packageName = basePackage+"."+moduleName+".dao";
+		String packageName = basePackage+"."+moduleName+".service";
 		ctx.put("packageName", packageName);
 		ctx.put("basePackage", basePackage);
 		

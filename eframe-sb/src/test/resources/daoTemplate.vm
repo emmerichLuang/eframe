@@ -40,8 +40,8 @@ public class $daoName extends AbstractDao{
 	 * @param entity
 	 * @throws Exception
 	 */
-	public void delete($className entity) throws Exception{
-		super.del(${className}.class, entity.getId());
+	public Integer delete($className entity) throws Exception{
+		return super.del(${className}.class, entity.getId());
 	}
 
 		

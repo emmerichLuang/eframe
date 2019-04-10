@@ -45,8 +45,8 @@ public class AdminRoleSetDao extends AbstractDao{
 	 * @param entity
 	 * @throws Exception
 	 */
-	public void delete(AdminRoleSet entity) throws Exception{
-		super.del(AdminRoleSet.class, entity.getId());
+	public Integer delete(AdminRoleSet entity) throws Exception{
+		return super.del(AdminRoleSet.class, entity.getId());
 	}
 	
 	/**
