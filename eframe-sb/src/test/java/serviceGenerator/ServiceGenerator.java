@@ -86,7 +86,7 @@ public class ServiceGenerator extends DBBaseTest{
 
 		t.merge(ctx, sw);
 
-		System.out.println("\n\n\n\n\n\n");
+		//System.out.println("\n\n\n\n\n\n");
 		
 		return sw.toString();
 	}

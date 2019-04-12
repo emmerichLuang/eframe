@@ -1,13 +1,13 @@
 package com.module.employee.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.base.dto.BaseDto;
 import com.base.dto.PageResult;
 import com.base.dto.Pager;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.module.employee.dao.AdminRoleSetDao;
 import com.module.employee.entity.AdminRoleSet;
 
@@ -23,6 +23,15 @@ public class AdminRoleSetService {
 	@Autowired
 	private AdminRoleSetDao dao;
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public AdminRoleSet get(String id) throws Exception{
+		return dao.get(AdminRoleSet.class, id);
+	}
 	
 	/**
 	 * 
