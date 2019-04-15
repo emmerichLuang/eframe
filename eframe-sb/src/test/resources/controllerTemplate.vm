@@ -1,4 +1,4 @@
-package com.module.employee.controller;
+package ${basePackage}.${moduleName}.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.base.controller.BaseController;
-import com.module.employee.service.AdminRoleSetService;
+import ${basePackage}.${moduleName}.service.${serviceName};
 
 /**
  * by E.E's code Generator
- * @Date 2019-04-15
+ * @Date $date
  * @author liangrl
  *
  */
 @Controller
 @RequestMapping(value={"/employee/adminRoleSet/*"})
-public class AdminRoleSetController extends BaseController{
-	private static Logger logger = LoggerFactory.getLogger(AdminRoleSetController.class);
+public class ${controllerName} extends BaseController{
+	private static Logger logger = LoggerFactory.getLogger(${controllerName}.class);
 	
 	@Autowired
-	private AdminRoleSetService service;
+	private ${serviceName} service;
 	
 	/**
 	 * 
