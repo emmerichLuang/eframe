@@ -1,9 +1,9 @@
-package ${basePackage}.${moduleName}.dao;
+package com.module.employee.dao;
 
 import com.base.dao.AbstractDao;
 import com.base.util.GUID;
 import org.springframework.stereotype.Component;
-import ${basePackage}.${moduleName}.entity.$className;
+import com.module.employee.entity.ViewUserInfo;
 import com.base.dto.BaseDto;
 import com.base.dto.PageResult;
 import com.base.dto.Pager;
@@ -15,11 +15,11 @@ import org.apache.commons.lang.StringUtils;
 /**
  * by E.E's code Generator. 
  * @author liangrl
- * @date   $date
+ * @date   2019-04-16
  *
  */
 @Component
-public class $daoName extends AbstractDao{
+public class ViewUserInfoDao extends AbstractDao{
 
 	
 	/**
@@ -27,11 +27,11 @@ public class $daoName extends AbstractDao{
 	 * @param entity
 	 * @throws Exception
 	 */
-	public String create($className entity) throws Exception{
+	public String create(ViewUserInfo entity) throws Exception{
 		if(StringUtils.isEmpty(entity.getId())){
 			entity.setId(GUID.nextUUID());
 		}	
-		super.insert(${className}.class, entity, false);
+		super.insert(ViewUserInfo.class, entity, false);
 		
 		return entity.getId(); 
 	}
@@ -41,19 +41,13 @@ public class $daoName extends AbstractDao{
 	 * @param entity
 	 * @throws Exception
 	 */
-	public Integer delete($className entity) throws Exception{
-		return super.del(${className}.class, entity.getId());
+	public Integer delete(ViewUserInfo entity) throws Exception{
+		return super.del(ViewUserInfo.class, entity.getId());
 	}
 
-	/**
-	 * 
-	 * @param entity
-	 * @param dto
-	 * @param pager
-	 * @throws Exception
-	 */	
-	public PageResult<${className}> getPage(${className} entity, BaseDto dto, Pager pager) throws Exception{
-		PageResult<${className}> result = new PageResult<${className}>();
+		
+	public PageResult<ViewUserInfo> getPage(ViewUserInfo entity, BaseDto dto, Pager pager) throws Exception{
+		PageResult<ViewUserInfo> result = new PageResult<ViewUserInfo>();
 		
 		Integer currentPageNo = null;
 		if(dto.currentPageNo==null){
@@ -67,7 +61,7 @@ public class $daoName extends AbstractDao{
 		pager.setPageNo(currentPageNo);
 		pager.setPageSize(BaseDto.defaultPageSize);
 		
-		List<${className}> list= this.getList(entity, dto, pager);
+		List<ViewUserInfo> list= this.getList(entity, dto, pager);
 		Integer count = this.getCount(entity, dto);
 		
 		result.setCurrentPageNo(currentPageNo);
@@ -78,7 +72,7 @@ public class $daoName extends AbstractDao{
 		return result;
 	}
 	
-	public Integer update(${className} entity){
+	public Integer update(ViewUserInfo entity){
 		//TODO:
 		return 0;
 	}
@@ -89,11 +83,11 @@ public class $daoName extends AbstractDao{
 	 * @param dto
 	 * @throws Exception
 	 */
-	public Integer getCount(${className} entity, BaseDto dto){
+	public Integer getCount(ViewUserInfo entity, BaseDto dto){
 	
-		String sql = "select count(*) from ${TBName} where 1=1 ";
-		
+		String sql = "select count(*) from view_user_info where 1=1 ";
 		WhereCond wc = this.appendWhereCond(entity, dto);
+		
 		sql += wc.getWhereCond();
 		
 		return this.getCount(sql, wc.getParams().toArray());
@@ -107,9 +101,9 @@ public class $daoName extends AbstractDao{
 	 * @param pager
 	 * @throws Exception
 	 */	
-	public List<${className}> getList(${className} entity, BaseDto dto, Pager pager) throws Exception{
+	public List<ViewUserInfo> getList(ViewUserInfo entity, BaseDto dto, Pager pager) throws Exception{
 		
-		String sql = "select * from ${TBName} where 1=1 ";
+		String sql = "select * from view_user_info where 1=1 ";
 		WhereCond wc = this.appendWhereCond(entity, dto);
 		
 		sql += wc.getWhereCond();
@@ -124,7 +118,7 @@ public class $daoName extends AbstractDao{
 	}
 	
 
-	private WhereCond appendWhereCond(${className} entity, BaseDto dto){
+	private WhereCond appendWhereCond(ViewUserInfo entity, BaseDto dto){
 		StringBuilder where = new StringBuilder();
 		
 		List<Object> params = new ArrayList<Object>();

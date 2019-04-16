@@ -26,7 +26,7 @@ public class NodeTest extends DBBaseTest{
 		for(int i=1;i<size;i++){
 			list.add(i);
 		}
-		
+		//打乱
 		Collections.shuffle(list);
 		
 		Node<Object> head = Node.createLinkedListFromArray(list.toArray());
@@ -38,6 +38,7 @@ public class NodeTest extends DBBaseTest{
 	public void execute(){
 		Node<Object> head = empList();
 
+		//遍历链表
 		Node<Object> current = head;
 		do{
 			System.out.println(current.getValue());

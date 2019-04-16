@@ -20,8 +20,13 @@ public abstract class DBBaseTest {
 		return dataSource;
 	}
 	
+	static Long begin = null;
+	
 	@Before
 	public void init() throws Exception {
+		begin = System.currentTimeMillis();
+		System.out.println("开始测试-----------------");
+		
 		InputStream stream = DBBaseTest.class.getClassLoader().getResourceAsStream("application.properties");
 		BufferedReader bf = new BufferedReader(new InputStreamReader(stream));
 		propertie.load(bf);
@@ -38,7 +43,6 @@ public abstract class DBBaseTest {
 		dataSource.setUsername(username);
 		dataSource.setPassword(pwd);
 
-		System.out.println("开始测试-----------------");
 	}
 
 	@After
@@ -47,6 +51,6 @@ public abstract class DBBaseTest {
 			dataSource.close();
 		}
 		
-		System.out.println("测试结束-----------------");
+		System.out.println("耗时"+(System.currentTimeMillis()-begin)+"(millsec) 测试结束-----------------");
 	}
 }

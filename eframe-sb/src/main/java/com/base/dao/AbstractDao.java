@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.base.entity.BaseEntity;
 import com.base.util.JacksonUtil;
 
 public abstract class AbstractDao {
@@ -316,7 +317,7 @@ public abstract class AbstractDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> int del(Class<T> clazz, Object id) throws Exception {
+	public <T> int del(Class<? extends BaseEntity> clazz, Object id) throws Exception {
 		
 		String sql = String.format("delete from %s where %s=?", ReflectMapper.getTableName(clazz.getName()),
 				ReflectMapper.getPKName(clazz.getName()));

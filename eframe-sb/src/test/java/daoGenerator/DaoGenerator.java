@@ -15,7 +15,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.Application;
-import com.module.employee.entity.AdminRoleSet;
+import com.module.employee.entity.ViewUserInfo;
 
 import db.DBBaseTest;
 
@@ -29,8 +29,8 @@ import db.DBBaseTest;
 public class DaoGenerator extends DBBaseTest{
 	
 	private static String moduleName = "employee";		//某个module包名，驼峰
-	
-	private static Class clazz = AdminRoleSet.class;
+	private static Class clazz = ViewUserInfo.class;
+	private static String tableName = "view_user_info";
 	
 	private static String className = clazz.getSimpleName();	
 	
@@ -75,8 +75,8 @@ public class DaoGenerator extends DBBaseTest{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String currentDateStr = sdf.format(new Date());
 		
-		//首字母大写
 		ctx.put("daoName", daoName);
+		ctx.put("TBName", tableName);
 		ctx.put("className", className);
 		ctx.put("date", currentDateStr);
 		ctx.put("moduleName", moduleName);
