@@ -1,16 +1,18 @@
 package com.module.employee.dao;
 
-import com.base.dao.AbstractDao;
-import com.base.util.GUID;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
-import com.module.employee.entity.ViewUserInfo;
+
+import com.base.dao.AbstractDao;
 import com.base.dto.BaseDto;
 import com.base.dto.PageResult;
 import com.base.dto.Pager;
 import com.base.dto.WhereCond;
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.commons.lang.StringUtils;
+import com.base.util.SidGenerator;
+import com.module.employee.entity.ViewUserInfo;
 
 /**
  * by E.E's code Generator. 
@@ -29,7 +31,7 @@ public class ViewUserInfoDao extends AbstractDao{
 	 */
 	public String create(ViewUserInfo entity) throws Exception{
 		if(StringUtils.isEmpty(entity.getId())){
-			entity.setId(GUID.nextUUID());
+			entity.setId(SidGenerator.getId());
 		}	
 		super.insert(ViewUserInfo.class, entity, false);
 		

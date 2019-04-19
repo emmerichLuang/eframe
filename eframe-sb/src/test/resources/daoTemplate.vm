@@ -1,7 +1,7 @@
 package ${basePackage}.${moduleName}.dao;
 
 import com.base.dao.AbstractDao;
-import com.base.util.GUID;
+import com.base.util.SidGenerator;
 import org.springframework.stereotype.Component;
 import ${basePackage}.${moduleName}.entity.$className;
 import com.base.dto.BaseDto;
@@ -29,7 +29,7 @@ public class $daoName extends AbstractDao{
 	 */
 	public String create($className entity) throws Exception{
 		if(StringUtils.isEmpty(entity.getId())){
-			entity.setId(GUID.nextUUID());
+			entity.setId(SidGenerator.getId());
 		}	
 		super.insert(${className}.class, entity, false);
 		

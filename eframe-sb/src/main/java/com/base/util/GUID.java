@@ -3,6 +3,13 @@ package com.base.util;
 import java.io.Serializable;
 import java.net.UnknownHostException;
 
+/**
+ * 拷贝过来的id生成器。
+ * 简单粗暴的uuid去掉斜杠， 待优化。
+ * @Date 2019年4月16日
+ * @author E.E.
+ *
+ */
 public class GUID implements Serializable, Comparable<Object>{
 	private static final long serialVersionUID = 6010836986783019344L;
 
