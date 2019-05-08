@@ -26,13 +26,15 @@ import db.DBBaseTest;
 @SpringBootTest(classes = Application.class)
 public class DDLGenerator extends DBBaseTest{
 
-	private static String tableName = "view_user_info";
-	
 	private static String moduleName = "employee";
+	
+	private static String tableName = "view_user_info";
+	private static String ddlName = "viewUserInfo";	
+	
 	private static String ddlFolder = "E:/workspace/eframe/eframe-sb/src/main/java/com/module/"+moduleName+"/entity/";
 	private static String packageName = "com.module."+moduleName+".entity";
 	
-	private static String ddlName = "viewUserInfo";
+
 	//首字母大写
 	static{
 		ddlName = (new StringBuilder()).append(Character.toUpperCase(ddlName.charAt(0))).append(ddlName.substring(1)).toString();		
