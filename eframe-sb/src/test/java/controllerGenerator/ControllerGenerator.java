@@ -81,6 +81,10 @@ public class ControllerGenerator extends DBBaseTest{
 		ctx.put("date", currentDateStr);
 		ctx.put("moduleName", moduleName);
 		
+		//类名， 首字母小写
+		String subModuleName = (new StringBuilder()).append(Character.toLowerCase(className.charAt(0))).append(className.substring(1)).toString();
+		ctx.put("subModuleName", subModuleName);
+		
 		String packageName = basePackage+"."+moduleName+".controller";
 		ctx.put("packageName", packageName);
 		ctx.put("basePackage", basePackage);

@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
 import com.module.employee.service.AdminRoleSetService;
 
 /**
  * by E.E's code Generator
- * @Date 2019-04-15
+ * @Date 2019-05-14
  * @author liangrl
  *
  */
@@ -33,8 +34,8 @@ public class AdminRoleSetController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/createOrUpdatePage")
-	public ModelAndView createOrUpdatePage(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("/editPage")
+	public ModelAndView editPage(HttpServletRequest request, HttpServletResponse response)
 			throws Exception{
 		String id = request.getParameter("id");
 		
@@ -45,23 +46,26 @@ public class AdminRoleSetController extends BaseController{
 	
 	
 	/**
-	 * createOrUpdatePage -->createOrUpdate
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ModelAndView save(HttpServletRequest requset,HttpServletResponse response)throws Exception{
+	* editPage -->save
+	* @param response
+	* @return
+	* @throws Exception
+	*/
+	@ResponseBody
+	@RequestMapping("/save")
+	public Object save(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		//TODO:
 		return null;
 	}
 	
 	/**
 	 * export
-	 * @param requset
+	 * @param request
 	 * @param response
 	 * @return
 	 */
-	public ModelAndView export(HttpServletRequest requset,HttpServletResponse response){
+	@RequestMapping("/export")
+	public ModelAndView export(HttpServletRequest request,HttpServletResponse response){
 		//TODO:
 		return null;
 	}
@@ -71,29 +75,34 @@ public class AdminRoleSetController extends BaseController{
 	 * @param response
 	 * @return
 	 */
-	public ModelAndView doDel(HttpServletRequest requset,HttpServletResponse response){
+	@ResponseBody
+	@RequestMapping("/delete")
+	public Object delete(HttpServletRequest request,HttpServletResponse response){
 		//TODO:
 		return null;
 	}
 	
 	/**
 	 * 
-	 * @param requset
+	 * @param request
 	 * @param response
 	 * @return
 	 */
-	public ModelAndView listPage(HttpServletRequest requset,HttpServletResponse response){
+	@RequestMapping("/listPage")
+	public ModelAndView listPage(HttpServletRequest request,HttpServletResponse response){
 		//TODO:
 		return null;
 	}
 	
 	/**
 	 * 
-	 * @param requset
+	 * @param request
 	 * @param response
 	 * @return
 	 */
-	public ModelAndView listData(HttpServletRequest requset,HttpServletResponse response){
+	@ResponseBody
+	@RequestMapping("/listData")
+	public Object listData(HttpServletRequest request,HttpServletResponse response){
 		//TODO:
 		return null;
 	}
