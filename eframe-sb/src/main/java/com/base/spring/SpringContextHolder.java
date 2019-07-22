@@ -4,6 +4,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+/**
+ * 可以不使用依赖的方式，获取某个类。
+ * @Date 2019年7月19日
+ * @author E.E.
+ *
+ */
 @Component
 public class SpringContextHolder implements ApplicationContextAware{
 	private static ApplicationContext applicationContext;

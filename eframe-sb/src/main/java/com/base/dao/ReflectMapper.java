@@ -179,16 +179,6 @@ public class ReflectMapper {
 	}
 	
 	/**
-	 * 缓存前缀
-	 * @param ddlName
-	 * @return
-	 */
-	/*public static String getCachePrefix(String ddlName){
-		return CACHE_PREFIX.get(ddlName);
-	}*/
-	
-	
-	/**
 	 * 将jdbcTemplate查询的map结果集 反射生成对应的bean
 	 * 
 	 * @param clazz
@@ -222,7 +212,5 @@ public class ReflectMapper {
 		BeanUtils.populate(instance, conCurrent);
 		
 		return instance;
-		//String temp = JacksonUtil.encode(conCurrent);
-		//return (T) JacksonUtil.decode(temp, clazz);
 	}
 }

@@ -17,6 +17,6 @@ import db.DBBaseTest;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class LockTest extends DBBaseTest{
-
+	
 	
 }

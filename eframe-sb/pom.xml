@@ -78,6 +78,11 @@
 		</dependency>
 
 		<dependency>
+		    <groupId>redis.clients</groupId>
+		    <artifactId>jedis</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>ejb3-persistence</artifactId>
 			<version>1.0.2.GA</version>
@@ -100,11 +105,11 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		
-		 <dependency>
+		 <!-- <dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-redis</artifactId>
     		<version>1.4.6.RELEASE</version>
-		</dependency> 
+		</dependency>  -->
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -305,6 +310,15 @@
 		<druid.loginUsername>EE-sb</druid.loginUsername>
 		<druid.loginPassword>EE-sb$</druid.loginPassword>
 		<druid.resetEnable>false</druid.resetEnable>		
+		
+		<redis.jedis.server>172.27.137.3:6379</redis.jedis.server>
+		<redis.jedis.connectTimeout>10000</redis.jedis.connectTimeout>
+		<redis.jedis.requirepass></redis.jedis.requirepass>
+		<redis.jedis.database>6</redis.jedis.database>
+		<redis.jedis.maxActive>32</redis.jedis.maxActive>
+		<redis.jedis.maxIdle>32</redis.jedis.maxIdle>
+		<redis.jedis.maxWait>60000</redis.jedis.maxWait>
+		<redis.jedis.testOnBorrow>false</redis.jedis.testOnBorrow>		
 		
 	</properties>
 
