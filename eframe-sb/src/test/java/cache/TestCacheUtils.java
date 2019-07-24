@@ -123,7 +123,8 @@ public class TestCacheUtils {
 	}
 	
 	public void returnClient(Jedis client) {
-		pool.returnResource(client);
+		//pool.returnResource(client);
+		pool.close();
 	}
 	
 	public void stop() {

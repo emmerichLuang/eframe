@@ -13,18 +13,19 @@ import redis.clients.jedis.Transaction;
  */
 public class MultiExecTest {
 
-	public static Integer COUNT = 100;
-	public static Integer THREAD_COUNT = 100000;
+	public static Integer COUNT = 20;
+	public static volatile Integer THREAD_COUNT = 200;
 	
-	public static String key = "lockKey";
+	public static String key = "lockKey3";
 	
 	public static void main(String[] args) {
-		noLock();
+		//noLock();
+		_lockTest();
 	}
 
 	static void noLock(){
 		for(int i=0; i<THREAD_COUNT; i++){
-			new Runnable(){
+			new Thread(new Runnable(){
 				@Override
 				public void run() {
 					if(MultiExecTest.COUNT<1){
@@ -35,38 +36,65 @@ public class MultiExecTest {
 					
 					System.err.println("COUNT:"+MultiExecTest.COUNT);
 				}
-			}.run();
+			}).start();
 		}
 	}
 	
-	static void hasLock(){
+	/**
+	 * 命令在设置成功时返回 1 ， 设置失败时返回 0 。
+	 * @param key
+	 * @return
+	 */
+	static boolean setLockSuccess(String key, Jedis conn){
+		
+		Long val = conn.setnx(key, "doing");
+		if(val==0){
+			//一次重试
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			val = conn.setnx(key, "doing");
+			if(val==1){
+				return true;
+			}else{
+				return false;				
+			}
+		}else{
+			return true;
+		}
+	}
+	
+	static void releaseLock(String key, Jedis conn){
+		conn.del(key);
+	}
+	
+	static void _lockTest(){
 		for(int i=0; i<THREAD_COUNT; i++){
+			
+			new Thread(
 			new Runnable(){
 				@Override
 				public void run() {
-					
-					Response<String> resp =null;
-					
 					Jedis conn = TestCacheUtils.getInstance().getClient();
-					conn.watch(key);
-					Transaction tx = conn.multi();
+					boolean flag = setLockSuccess(key, conn);
+					if(!flag){
+						System.err.println("重试过都不行，本次线程结束");
+						return;
+					}
 					try{
-						resp = tx.set(key, "doing");
-						
 						if(MultiExecTest.COUNT<1){
-							System.err.println("已经无数据了");
+							//System.err.println("已经无数据了(inner)");
 							return;
-						}else{
-							MultiExecTest.COUNT--;							
 						}
+						MultiExecTest.COUNT--;
+						System.err.println("MultiExecTest.COUNT:"+MultiExecTest.COUNT);
 					}finally{
-						tx.exec();
-						System.err.println("COUNT:"+COUNT);
-						conn.unwatch();
-						TestCacheUtils.getInstance().returnClient(conn);
+						releaseLock(key, conn);
 					}
 				}
-			}.run();
+			}).start();
 		}
 	}
 }
