@@ -14,8 +14,11 @@ public class RedisService {
     
 	@Autowired
     private RedisTemplate<Object,Object> redisTemplate; 
-    
+	
+	
+	
 	public void set(String key, Object value) {
+		
 		redisTemplate.opsForValue().set(key, value);
 	}
 	public void set(String key, Object value, long validTime) {

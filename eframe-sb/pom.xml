@@ -105,6 +105,7 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		
+		<!-- 这个包引入的话，需要redis版本较高。 -->
 		 <!-- <dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-redis</artifactId>
